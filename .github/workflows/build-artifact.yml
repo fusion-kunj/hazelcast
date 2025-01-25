@@ -16,25 +16,6 @@ jobs:
           ref: ${{steps.decide-ref.outputs.ref}}
           path: "hazelcast"
 
-      - name: Read Java Config
-        run: cat hazelcast/.github/java-config.env >> $GITHUB_ENV
-  
-      - name: Setup JDK
-        uses: actions/setup-java@v4
-        with:
-          java-version: ${{ env.JAVA_VERSION }}
-          distribution: ${{ env.JAVA_DISTRIBUTION }}
-          architecture: x64
-          cache: "maven"
-
-      - name: Setup Local Maven Cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
       - name: Build hazelcast jar
         working-directory: hazelcast
         run: |
