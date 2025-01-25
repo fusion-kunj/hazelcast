@@ -16,13 +16,6 @@ jobs:
           ref: ${{steps.decide-ref.outputs.ref}}
           path: "hazelcast"
 
-      - name: Checkout Auto Discovery Repo
-        uses: actions/checkout@v4
-        with:
-          repository: hazelcast/auto-discovery-test-suite
-          token: ${{ env.DEVOPS_GITHUB_TOKEN }}
-          path: auto-discovery-test-suite
-
       - name: Read Java Config
         run: cat hazelcast/.github/java-config.env >> $GITHUB_ENV
   
